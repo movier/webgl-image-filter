@@ -77,14 +77,10 @@ function initBuffers(gl) {
   // shape. We do this by creating a Float32Array from the
   // JavaScript array, then use it to fill the current buffer.
 
+  // gl.STATIC_DRAW tells WebGL that the data are not likely to change.
   gl.bufferData(gl.ARRAY_BUFFER,
                 new Float32Array(positions),
                 gl.STATIC_DRAW);
-
-  return {
-    position: positionBuffer,
-    // color: colorBuffer,
-  };
 }
 
 function draw() {
@@ -96,6 +92,12 @@ function draw() {
     alert("Unable to initialize WebGL. Your browser or machine may not support it.");
     return;
   }
+
+  gl.clearColor(1, 1, 1, 1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
+
+  initBuffers(gl);
 
   // Vertex shader program
   const vsSource = `
@@ -122,13 +124,8 @@ function draw() {
     }
   `;
 
-  gl.clearColor(1, 1, 1, 1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
   const program = initShaderProgram(gl, vsSource, fsSource);
   const positionAttributeLocation = gl.getAttribLocation(program, 'position');
-  const positionBuffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
   gl.useProgram(program);
   gl.enableVertexAttribArray(positionAttributeLocation);
@@ -136,13 +133,6 @@ function draw() {
   // gl.vertexAttribPointer(location, size, type, normalize, stride, offset)
   // This method bind ARRAY_BUFFER to specified attribute
   gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
-
-
-  // gl.STATIC_DRAW tells WebGL that the data are not likely to change.
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-    -1, -1, -1, 1, 1, -1,
-    1, -1, 1, 1, -1, 1,
-  ]), gl.STATIC_DRAW);
 
   const texture = gl.createTexture();
   texture.image = new Image();
