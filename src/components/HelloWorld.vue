@@ -1,5 +1,5 @@
 <template>
-  <canvas id="glCanvas" width="553" height="415" />
+  <canvas id="glCanvas" width="960" height="641" />
 </template>
 
 <script>
@@ -151,7 +151,7 @@ function draw() {
   };
   texture.image.crossOrigin = '';
   // texture.image.src = 'http://davidguan.me/webgl-intro/filter/github.jpg';
-  texture.image.src = 'https://farm5.staticflickr.com/4485/24263717138_bde9950b28_h.jpg';
+  texture.image.src = 'masaaki-komori-587736-unsplash.jpg';
 }
 
 export default {
