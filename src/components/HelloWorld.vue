@@ -1,5 +1,5 @@
 <template>
-  <canvas id="glCanvas" width="600" height="600" />
+  <canvas id="glCanvas" width="553" height="415" />
 </template>
 
 <script>
@@ -114,13 +114,17 @@ function draw() {
     precision mediump float;
     varying vec2 v_coord;
     uniform sampler2D u_texture;
+    vec4 newColor;
 
     void main() {
       vec4 sampleColor = texture2D(u_texture, vec2(v_coord.x, 1.0 - v_coord.y));
-      sampleColor.r += 0.1;
-      sampleColor.g += 0.1;
-      // sampleColor.b = 1.0;
-      gl_FragColor = sampleColor;
+      newColor = sampleColor;
+      if (v_coord.x < 0.5) {
+        newColor.r = (sampleColor.r * .393) + (sampleColor.g * .769) + (sampleColor.b * .189);
+        newColor.g = (sampleColor.r * .349) + (sampleColor.g * .686) + (sampleColor.b * .168);
+        newColor.b = (sampleColor.r * .272) + (sampleColor.g * .534) + (sampleColor.b * .131);
+      }
+      gl_FragColor = newColor;
     }
   `;
 
@@ -146,7 +150,8 @@ function draw() {
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   };
   texture.image.crossOrigin = '';
-  texture.image.src = 'http://davidguan.me/webgl-intro/filter/github.jpg';
+  // texture.image.src = 'http://davidguan.me/webgl-intro/filter/github.jpg';
+  texture.image.src = 'https://farm5.staticflickr.com/4485/24263717138_bde9950b28_h.jpg';
 }
 
 export default {
