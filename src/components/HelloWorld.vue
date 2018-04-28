@@ -119,7 +119,7 @@ function draw() {
     void main() {
       vec4 sampleColor = texture2D(u_texture, vec2(v_coord.x, 1.0 - v_coord.y));
       newColor = sampleColor;
-      if (v_coord.x < 0.5) {
+      if (v_coord.x > 0.5) {
         newColor.r = (sampleColor.r * .393) + (sampleColor.g * .769) + (sampleColor.b * .189);
         newColor.g = (sampleColor.r * .349) + (sampleColor.g * .686) + (sampleColor.b * .168);
         newColor.b = (sampleColor.r * .272) + (sampleColor.g * .534) + (sampleColor.b * .131);
@@ -151,7 +151,7 @@ function draw() {
   };
   texture.image.crossOrigin = '';
   // texture.image.src = 'http://davidguan.me/webgl-intro/filter/github.jpg';
-  texture.image.src = 'masaaki-komori-587736-unsplash.jpg';
+  texture.image.src = 'li-yang-138248-unsplash.jpg';
 }
 
 export default {
