@@ -93,12 +93,6 @@ function draw() {
     return;
   }
 
-  gl.clearColor(1, 1, 1, 1);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
-
-  initBuffers(gl);
-
   // Vertex shader program
   const vsSource = `
     attribute vec2 position;
@@ -133,6 +127,8 @@ function draw() {
 
   gl.useProgram(program);
   gl.enableVertexAttribArray(positionAttributeLocation);
+
+  initBuffers(gl);
 
   // gl.vertexAttribPointer(location, size, type, normalize, stride, offset)
   // This method bind ARRAY_BUFFER to specified attribute
