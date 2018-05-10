@@ -108,17 +108,24 @@ function draw() {
     precision mediump float;
     varying vec2 v_coord;
     uniform sampler2D u_texture;
-    vec4 newColor;
+    // vec4 newColor;
 
     void main() {
       vec4 sampleColor = texture2D(u_texture, vec2(v_coord.x, 1.0 - v_coord.y));
-      newColor = sampleColor;
-      if (v_coord.x > 0.5) {
-        newColor.r = (sampleColor.r * .393) + (sampleColor.g * .769) + (sampleColor.b * .189);
-        newColor.g = (sampleColor.r * .349) + (sampleColor.g * .686) + (sampleColor.b * .168);
-        newColor.b = (sampleColor.r * .272) + (sampleColor.g * .534) + (sampleColor.b * .131);
-      }
-      gl_FragColor = newColor;
+      mat4 m = mat4(
+        .393, .349, .272, 0,
+        .769, .686, .534, 0,
+        .189, .168, .131, 0,
+        0, 0, 0, 1
+      );
+      // newColor = sampleColor;
+      // if (v_coord.x > 0.5) {
+      //   newColor.r = (sampleColor.r * .393) + (sampleColor.g * .769) + (sampleColor.b * .189);
+      //   newColor.g = (sampleColor.r * .349) + (sampleColor.g * .686) + (sampleColor.b * .168);
+      //   newColor.b = (sampleColor.r * .272) + (sampleColor.g * .534) + (sampleColor.b * .131);
+      // }
+      // gl_FragColor = newColor;
+      gl_FragColor = m * sampleColor;
     }
   `;
 
