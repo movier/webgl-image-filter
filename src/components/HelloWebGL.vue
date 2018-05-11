@@ -3,31 +3,14 @@
 </template>
 
 <script>
-
-
-//
-// Initialize a shader program, so WebGL knows how to draw our data
-//
-function initShaderProgram(gl, vsSource, fsSource) {
-  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
-  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
-
-  // Create the shader program
-
-  const shaderProgram = gl.createProgram();
-  gl.attachShader(shaderProgram, vertexShader);
-  gl.attachShader(shaderProgram, fragmentShader);
-  gl.linkProgram(shaderProgram);
-
-  // If creating the shader program failed, alert
-
-  if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-    alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
-    return null;
+export default {
+  mounted() {
+    main();
   }
-
-  return shaderProgram;
 }
+
+
+
 
 //
 // creates a shader of the given type, uploads the source and
@@ -53,6 +36,30 @@ function loadShader(gl, type, source) {
   }
 
   return shader;
+}
+
+//
+// Initialize a shader program, so WebGL knows how to draw our data
+//
+function initShaderProgram(gl, vsSource, fsSource) {
+  const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+  const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+  // Create the shader program
+
+  const shaderProgram = gl.createProgram();
+  gl.attachShader(shaderProgram, vertexShader);
+  gl.attachShader(shaderProgram, fragmentShader);
+  gl.linkProgram(shaderProgram);
+
+  // If creating the shader program failed, alert
+
+  if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+    alert('Unable to initialize the shader program: ' + gl.getProgramInfoLog(shaderProgram));
+    return null;
+  }
+
+  return shaderProgram;
 }
 
 function initBuffers(gl) {
@@ -83,7 +90,7 @@ function initBuffers(gl) {
                 gl.STATIC_DRAW);
 }
 
-function draw() {
+function main() {
   const canvas = document.querySelector("#glCanvas");
   // Initialize the GL context
   const gl = canvas.getContext("webgl");
@@ -137,7 +144,6 @@ function draw() {
 
   initBuffers(gl);
 
-  // gl.vertexAttribPointer(location, size, type, normalize, stride, offset)
   // This method bind ARRAY_BUFFER to specified attribute
   gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
 
@@ -147,19 +153,11 @@ function draw() {
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   };
   texture.image.crossOrigin = '';
   texture.image.src = 'https://raw.githubusercontent.com/movier/webgl-image-filter/master/public/li-yang-138248-unsplash.jpg';
-}
-
-export default {
-  name: 'HelloWorld',
-  mounted() {
-    draw();
-  }
 }
 </script>
