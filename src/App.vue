@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <h1>Getting Started with WebGL and Image Filter</h1>
-    <HelloWorld />
+    <HelloWebGL />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWebGL from './components/HelloWebGL.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HelloWebGL
   }
 }
 </script>
