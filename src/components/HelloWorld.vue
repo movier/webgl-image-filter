@@ -1,5 +1,5 @@
 <template>
-  <canvas id="glCanvas" width="960" height="641" />
+  <canvas id="glCanvas" width="640" height="427" />
 </template>
 
 <script>
@@ -147,14 +147,13 @@ function draw() {
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   };
   texture.image.crossOrigin = '';
-  // texture.image.src = 'http://davidguan.me/webgl-intro/filter/github.jpg';
-  texture.image.src = 'li-yang-138248-unsplash.jpg';
+  texture.image.src = 'https://raw.githubusercontent.com/movier/webgl-image-filter/master/public/li-yang-138248-unsplash.jpg';
 }
 
 export default {
@@ -164,21 +163,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

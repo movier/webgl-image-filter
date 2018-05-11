@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Getting Started with WebGL and Image Filter</h1>
     <HelloWorld />
   </div>
 </template>
@@ -16,8 +17,15 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+h1 {
+  margin: 1em 0;
+  font-size: 28px;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
