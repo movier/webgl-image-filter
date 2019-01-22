@@ -1,1 +1,3 @@
-This is a vue cli project. Run with `yarn serve` or `npm serve`.
+This is a vue cli project. 
+First install dependencies with `yarn`.
+Then run with `yarn serve`.
